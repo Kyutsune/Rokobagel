@@ -70,6 +70,10 @@ public class Jeu extends Observable {
 
         }
 
+        // ajout des cases de But à atteindre
+
+        addCase(new But(this),2,2);
+
         heros = new Heros(this, grilleEntites[4][4]);
         Bloc b = new Bloc(this, grilleEntites[6][6]);
 
