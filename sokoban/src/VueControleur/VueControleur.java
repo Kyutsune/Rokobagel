@@ -33,6 +33,7 @@ public class VueControleur extends JFrame implements Observer {
     private ImageIcon icoVide;
     private ImageIcon icoMur;
     private ImageIcon icoBloc;
+    private ImageIcon icoVictoire;
 
 
     private JLabel[][] tabJLabel; // cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
@@ -76,6 +77,7 @@ public class VueControleur extends JFrame implements Observer {
         icoVide = chargerIcone("Images/Vide.png");
         icoMur = chargerIcone("Images/Mur.png");
         icoBloc = chargerIcone("Images/Colonne.png");
+        icoVictoire = chargerIcone("Image/Victoire.png");
     }
 
     private ImageIcon chargerIcone(String urlIcone) {
@@ -136,9 +138,12 @@ public class VueControleur extends JFrame implements Observer {
                     } else {
                         if (jeu.getGrille()[x][y] instanceof Mur) {
                             tabJLabel[x][y].setIcon(icoMur);
-                        } else if (jeu.getGrille()[x][y] instanceof Vide) {
+                        } if (jeu.getGrille()[x][y] instanceof Vide) {
 
                             tabJLabel[x][y].setIcon(icoVide);
+                        } else if (jeu.getGrille()[x][y] instanceof But) {
+
+                            tabJLabel[x][y].setIcon(icoVictoire);
                         }
                     }
 
