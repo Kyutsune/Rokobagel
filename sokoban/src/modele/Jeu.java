@@ -13,14 +13,21 @@ import java.util.Observable;
 
 public class Jeu extends Observable {
 
-    public static final int SIZE_X = 30;
-    public static final int SIZE_Y = 10;
+    public static final int SIZE_X = 75;
+    public static final int SIZE_Y = 22;
 
     public boolean jeu_fini=false;
 
 
+    private int atteindre_but = 0;
+    private int nombre_but = 2;
+    public void setNombre_but(int nombre_but) {
+        this.nombre_but = nombre_but;
+    }
 
     private Heros heros;
+
+    private Tool t;
 
     private HashMap<Case, Point> map = new  HashMap<Case, Point>(); // permet de récupérer la position d'une case à partir de sa référence
     private Case[][] grilleEntites = new Case[SIZE_X][SIZE_Y]; // permet de récupérer une case à partir de ses coordonnées
@@ -73,9 +80,25 @@ public class Jeu extends Observable {
 
 
         heros = new Heros(this, grilleEntites[4][4]);
-        Bloc b = new Bloc(this, grilleEntites[6][6]);
 
-        addCase(new But(this),2,2);
+        Bloc[] tableauDeBlocs = new Bloc[nombre_but];
+        for(int i = 0; i < nombre_but; i++)
+        {
+            int x = t.monRandom(SIZE_X-1, 2);
+            int y = t.monRandom(SIZE_Y-1, 2);
+            tableauDeBlocs[i] = new Bloc(this,grilleEntites[x][y]);
+
+        }
+        //Bloc b = new Bloc(this, grilleEntites[6][6]);
+
+        for(int i = 0; i < nombre_but; i++)
+        {
+            int x = t.monRandom(SIZE_X-1, 2);
+            int y = t.monRandom(SIZE_Y-1, 2);
+
+            addCase(new But(this),x,y);
+        }
+
 
     }
 
@@ -98,9 +121,14 @@ public class Jeu extends Observable {
 
         if (contenuDansGrille(pCible)) {
             Entite eCible = caseALaPosition(pCible).getEntite();
+            Entite eCourant = caseALaPosition(pCourant).getEntite();
 
-            if (eCible != null) {
-                eCible.pousser(d);
+            if (eCible != null && eCible instanceof Bloc) {
+                /* On peut pousser le bloc que si la cible est du vide */
+                if (caseALaPosition(pCible) instanceof Vide){
+                    eCible.pousser(d);
+                }
+
                 partie_terminee(eCible);
 
             }
@@ -110,7 +138,10 @@ public class Jeu extends Observable {
                 e.getCase().quitterLaCase();
                 caseALaPosition(pCible).entrerSurLaCase(e);
 
-            } else {
+
+
+            }
+            else {
                 retour = false;
             }
 
@@ -157,9 +188,15 @@ public class Jeu extends Observable {
     public void partie_terminee(Entite b)
     {
         if(b.getCase() instanceof But)
-            jeu_fini=true;
-        else
-            return;
+            atteindre_but++;
+            System.out.println(atteindre_but);
+            if(atteindre_but == nombre_but)
+                jeu_fini = true;
+        else {
+            jeu_fini=false;
+        }
+
+        return;
     }
 
 }

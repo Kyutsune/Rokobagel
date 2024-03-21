@@ -1,6 +1,6 @@
 package VueControleur;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -44,6 +45,7 @@ public class VueControleur extends JFrame implements Observer {
         sizeY = _jeu.SIZE_Y;
         jeu = _jeu;
 
+        //demanderNombreBut();
         chargerLesIcones();
         placerLesComposantsGraphiques();
         ajouterEcouteurClavier();
@@ -54,6 +56,13 @@ public class VueControleur extends JFrame implements Observer {
 
     }
 
+    private void demanderNombreBut()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Saisir le nombre de but (entier) : ");
+        int nbBut = scanner.nextInt();
+        jeu.setNombre_but(nbBut);
+    }
     private void ajouterEcouteurClavier() {
         addKeyListener(new KeyAdapter() { // new KeyAdapter() { ... } est une instance de classe anonyme, il s'agit d'un objet qui correspond au controleur dans MVC
             @Override
@@ -102,17 +111,19 @@ public class VueControleur extends JFrame implements Observer {
 
     private void placerLesComposantsGraphiques() {
         setTitle("Sokoban");
-        setSize(sizeX*100, sizeY*50);
+        setSize(30000, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
 
         JComponent grilleJLabels = new JPanel(new GridLayout(sizeY, sizeX)); // grilleJLabels va contenir les cases graphiques et les positionner sous la forme d'une grille
 
         tabJLabel = new JLabel[sizeX][sizeY];
 
+
         for (int y = 0; y < sizeY; y++) {
             for (int x = 0; x < sizeX; x++) {
                 JLabel jlab = new JLabel();
                 tabJLabel[x][y] = jlab; // on conserve les cases graphiques dans tabJLabel pour avoir un accès pratique à celles-ci (voir mettreAJourAffichage() )
+
                 grilleJLabels.add(jlab);
             }
         }
