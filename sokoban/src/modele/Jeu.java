@@ -16,6 +16,8 @@ public class Jeu extends Observable {
     public static final int SIZE_X = 30;
     public static final int SIZE_Y = 10;
 
+    public boolean jeu_fini=false;
+
 
 
     private Heros heros;
@@ -47,10 +49,6 @@ public class Jeu extends Observable {
 
     
     private void initialisationNiveau() {
-
-
-
-
         // murs extérieurs horizontaux
         for (int x = 0; x < SIZE_X; x++) {
             addCase(new Mur(this), x, 0);
@@ -72,10 +70,12 @@ public class Jeu extends Observable {
 
         // ajout des cases de But à atteindre
 
-        addCase(new But(this),2,2);
+
 
         heros = new Heros(this, grilleEntites[4][4]);
         Bloc b = new Bloc(this, grilleEntites[6][6]);
+
+        addCase(new But(this),2,2);
 
     }
 
@@ -98,8 +98,11 @@ public class Jeu extends Observable {
 
         if (contenuDansGrille(pCible)) {
             Entite eCible = caseALaPosition(pCible).getEntite();
+
             if (eCible != null) {
                 eCible.pousser(d);
+                partie_terminee(eCible);
+
             }
 
             // si la case est libérée
@@ -149,6 +152,14 @@ public class Jeu extends Observable {
         }
         
         return retour;
+    }
+
+    public void partie_terminee(Entite b)
+    {
+        if(b.getCase() instanceof But)
+            jeu_fini=true;
+        else
+            return;
     }
 
 }

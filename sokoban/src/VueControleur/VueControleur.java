@@ -58,15 +58,22 @@ public class VueControleur extends JFrame implements Observer {
         addKeyListener(new KeyAdapter() { // new KeyAdapter() { ... } est une instance de classe anonyme, il s'agit d'un objet qui correspond au controleur dans MVC
             @Override
             public void keyPressed(KeyEvent e) {
+
+
                 switch(e.getKeyCode()) {  // on regarde quelle touche a été pressée
+
+
 
                     case KeyEvent.VK_LEFT : jeu.deplacerHeros(Direction.gauche); break;
                     case KeyEvent.VK_RIGHT : jeu.deplacerHeros(Direction.droite); break;
                     case KeyEvent.VK_DOWN : jeu.deplacerHeros(Direction.bas); break;
-                    case KeyEvent.VK_UP : jeu.deplacerHeros(Direction.haut); break;
+                    case KeyEvent.VK_UP : jeu.deplacerHeros(Direction.haut);break;
+
 
 
                 }
+                if(jeu.jeu_fini==true)
+                    System.out.println("fini");
             }
         });
     }
@@ -140,7 +147,7 @@ public class VueControleur extends JFrame implements Observer {
                             tabJLabel[x][y].setIcon(icoMur);
                         } if (jeu.getGrille()[x][y] instanceof Vide) {
 
-                            tabJLabel[x][y].setIcon(icoVide);
+                                tabJLabel[x][y].setIcon(icoVide);
                         } else if (jeu.getGrille()[x][y] instanceof But) {
 
                             tabJLabel[x][y].setIcon(icoVictoire);
