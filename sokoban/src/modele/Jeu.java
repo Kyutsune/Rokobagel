@@ -131,10 +131,9 @@ public class Jeu extends Observable {
             Entite eCourant = caseALaPosition(pCourant).getEntite();
 
             if (eCible != null && eCible instanceof Bloc) {
-                /* On peut pousser le bloc que si la cible est du vide */
-                if (caseALaPosition(pCible) instanceof Vide){
+                // On peut pousser le bloc que si la cible est du vide
+                if (caseALaPosition(pCible) instanceof Vide)
                     eCible.pousser(d);
-                }
 
                 partie_terminee(eCible);
 
@@ -144,17 +143,13 @@ public class Jeu extends Observable {
             if (caseALaPosition(pCible).peutEtreParcouru()) {
                 e.getCase().quitterLaCase();
                 caseALaPosition(pCible).entrerSurLaCase(e);
-
-
-
             }
-            else {
+            else
                 retour = false;
-            }
 
-        } else {
+
+        } else
             retour = false;
-        }
 
         return retour;
     }
