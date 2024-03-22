@@ -7,8 +7,12 @@ package modele;
 
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.List;
+
+
 
 
 public class Jeu extends Observable {
@@ -21,6 +25,8 @@ public class Jeu extends Observable {
 
     private int atteindre_but = 0;
     private int nombre_but = 2;
+    private List<Entite> tab_entite_but;
+
     public void setNombre_but(int nombre_but) {
         this.nombre_but = nombre_but;
     }
@@ -100,6 +106,7 @@ public class Jeu extends Observable {
         }
 
 
+        tab_entite_but=new ArrayList<>();
     }
 
     private void addCase(Case e, int x, int y) {
@@ -185,18 +192,25 @@ public class Jeu extends Observable {
         return retour;
     }
 
+    public boolean pas_deja_validee(Entite b)
+    {
+        return tab_entite_but.contains(b);
+    }
+
     public void partie_terminee(Entite b)
     {
-        if(b.getCase() instanceof But)
+        if(b.getCase() instanceof But && !pas_deja_validee(b)) {
             atteindre_but++;
             System.out.println(atteindre_but);
-            if(atteindre_but == nombre_but)
-                jeu_fini = true;
-        else {
-            jeu_fini=false;
+            tab_entite_but.add(b);
         }
+    if(atteindre_but == nombre_but)
+        jeu_fini = true;
+    else
+        jeu_fini=false;
 
-        return;
-    }
+
+    return;
+}
 
 }
