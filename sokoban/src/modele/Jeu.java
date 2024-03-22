@@ -17,8 +17,8 @@ import java.util.List;
 
 public class Jeu extends Observable {
 
-    public static final int SIZE_X = 75;
-    public static final int SIZE_Y = 22;
+    public static int SIZE_X = 75;
+    public static int SIZE_Y = 22;
 
     public boolean jeu_fini=false;
 
@@ -41,7 +41,15 @@ public class Jeu extends Observable {
 
 
     public Jeu() {
+        tab_entite_but=new ArrayList<>();
         initialisationNiveau();
+    }
+
+    public void Jeu_init_avec_tab(int taille_x,int taille_y,String tab_terrain[][])
+    {
+        this.SIZE_X=taille_x;
+        this.SIZE_Y=taille_y;
+        initialisationNiveau_a_partir_fichier(tab_terrain);
     }
 
 
@@ -78,13 +86,11 @@ public class Jeu extends Observable {
             for (int y = 1; y < SIZE_Y-1; y++) {
                 addCase(new Vide(this), x, y);
             }
-
         }
 
+
+
         // ajout des cases de But à atteindre
-
-
-
         heros = new Heros(this, grilleEntites[4][4]);
 
         Bloc[] tableauDeBlocs = new Bloc[nombre_but];
@@ -106,8 +112,38 @@ public class Jeu extends Observable {
         }
 
 
-        tab_entite_but=new ArrayList<>();
+
     }
+
+
+    private void initialisationNiveau_a_partir_fichier(String m_ter[][]) {
+
+        for(int x=0;x<this.SIZE_X;++x)
+            for(int y=0;y<SIZE_Y;++y)
+            {
+                switch(m_ter[x][y])
+                {
+                    case "#": addCase(new Mur(this), x, y); break;
+                    case ".": addCase(new Vide(this), x, y); break;
+                }
+            }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void addCase(Case e, int x, int y) {
         grilleEntites[x][y] = e;

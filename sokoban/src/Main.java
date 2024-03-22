@@ -1,6 +1,7 @@
 
 import VueControleur.VueControleur;
 import modele.Jeu;
+import modele.Tool;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +13,10 @@ import modele.Jeu;
 public class Main {
     public static void main(String[] args) {
         Jeu jeu = new Jeu();
-        
+
+        //Pour utiliser la recup de niveau dans un fichier
+        Tool test=new Tool(jeu);
+
         VueControleur vc = new VueControleur(jeu);
         vc.setVisible(true);
 
