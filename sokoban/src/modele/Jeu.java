@@ -17,8 +17,8 @@ import java.util.List;
 
 public class Jeu extends Observable {
 
-    public static int SIZE_X = 75;
-    public static int SIZE_Y = 22;
+    public static int SIZE_X = 7;
+    public static int SIZE_Y = 8;
 
     public boolean jeu_fini=false;
 
@@ -91,7 +91,6 @@ public class Jeu extends Observable {
 
 
         // ajout des cases de But à atteindre
-        heros = new Heros(this, grilleEntites[4][4]);
 
         Bloc[] tableauDeBlocs = new Bloc[nombre_but];
         for(int i = 0; i < nombre_but; i++)
@@ -125,6 +124,7 @@ public class Jeu extends Observable {
                 {
                     case "#": addCase(new Mur(this), x, y); break;
                     case ".": addCase(new Vide(this), x, y); break;
+                    case "h": heros = new Heros(this,grilleEntites[x][y]); break;
                 }
             }
     }
