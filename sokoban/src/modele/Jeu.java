@@ -120,7 +120,7 @@ public class Jeu extends Observable {
 
 
     private void initialisationNiveau_a_partir_fichier(String m_ter[][]) {
-
+        vider();
 
         Bloc[] tableauDeBlocs = new Bloc[nombre_but];
         for(int x=0;x<this.SIZE_X;++x)
@@ -255,6 +255,14 @@ public class Jeu extends Observable {
 
 
         return;
+    }
+    public void vider()
+    {
+        for(int i = 0 ; i<SIZE_X;i++)
+        {
+            for(int j = 0 ; j<SIZE_Y;j++)
+                addCase(new Vide(this), i, j);
+        }
     }
 
 }
