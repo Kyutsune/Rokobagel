@@ -53,6 +53,7 @@ public class Jeu extends Observable {
     {
         this.SIZE_X=taille_x;
         this.SIZE_Y=taille_y;
+        System.out.println(SIZE_X+SIZE_Y);
         initialisationNiveau_a_partir_fichier(tab_terrain);
     }
 
@@ -120,23 +121,31 @@ public class Jeu extends Observable {
 
 
     private void initialisationNiveau_a_partir_fichier(String m_ter[][]) {
+        viderGrille();
+        initialisationNiveau();
+
+        jeu_fini = false;
 
 
-        Bloc[] tableauDeBlocs = new Bloc[nombre_but];
+
+
+
+
         for(int x=0;x<this.SIZE_X;++x)
             for(int y=0;y<SIZE_Y;++y)
             {
                 switch(m_ter[x][y])
                 {
                     case "#": addCase(new Mur(this), x, y); break;
-                    case ".": addCase(new Vide(this), x, y); break;
-                    case "h": heros = new Heros(this,grilleEntites[x][y]); break;
+                    case ".": addCase(new Vide(this),x,y);break;
+                    case "h": heros = new Heros(this,grilleEntites[x][y]);System.out.println("Héro : "+x+y); break;
                     case "f": addCase(new But(this),x,y);setNombre_but(nombre_but+1);break;
                     case "b": new Bloc(this,grilleEntites[x][y]); break;
                 }
             }
         System.out.println(nombre_but);
         System.out.println(atteindre_but);
+        System.out.println(heros.getCase());
 
     }
 
@@ -163,7 +172,7 @@ public class Jeu extends Observable {
 
 
 
-    /** Si le déplacement de l'entité est autorisé (pas de mur ou autre entité), il est réalisé
+/** Si le déplacement d2e l'entité est autorisé (pas de mur ou autre entité), il est réalisé
      * Sinon, rien n'est fait.
      */
     public boolean deplacerEntite(Entite e, Direction d) {
@@ -175,6 +184,7 @@ public class Jeu extends Observable {
 
         if (contenuDansGrille(pCible)) {
             Entite eCible = caseALaPosition(pCible).getEntite();
+            System.out.println(eCible==null);
             Entite eCourant = caseALaPosition(pCourant).getEntite();
 
             if (eCible != null && eCible instanceof Bloc) {
@@ -182,9 +192,12 @@ public class Jeu extends Observable {
                 if (caseALaPosition(pCible) instanceof Vide)
                     eCible.pousser(d);
 
-                partie_terminee(eCible);
+
+
+
 
             }
+
 
             // si la case est libérée
             if (caseALaPosition(pCible).peutEtreParcouru()) {
@@ -193,12 +206,19 @@ public class Jeu extends Observable {
             }
             else
                 retour = false;
+            
+
+            if(eCible!=null)
+                partie_terminee(eCible);
+
 
 
         } else
             retour = false;
 
+
         return retour;
+
     }
 
 
@@ -248,6 +268,8 @@ public class Jeu extends Observable {
         }
         if(atteindre_but == nombre_but) {
             jeu_fini = true;
+            
+
             niveaux.Changer_niveau(this);
         }
         else
@@ -257,4 +279,16 @@ public class Jeu extends Observable {
         return;
     }
 
+
+
+    public void viderGrille() {
+        //for (int i = 0; i < SIZE_X; i++) {
+        //    for (int j = 0; j < SIZE_Y; j++) {
+        //        grilleEntites[i][j] = new Vide(this);
+        //    }
+        //}
+        grilleEntites=new Case[SIZE_X][SIZE_Y];
+
+
+    }
 }
