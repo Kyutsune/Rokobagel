@@ -57,7 +57,10 @@ public class Jeu extends Observable {
         initialisationNiveau_a_partir_fichier(tab_terrain);
     }
 
-
+    public int GetNiveaux()
+    {
+        return niveaux.niveau_actuel;
+    }
 
     public Case[][] getGrille() {
         return grilleEntites;
@@ -268,9 +271,11 @@ public class Jeu extends Observable {
         }
         if(atteindre_but == nombre_but) {
             jeu_fini = true;
-            
 
             niveaux.Changer_niveau(this);
+            if (niveaux.niveau_actuel == 6) {
+
+            }
         }
         else
             jeu_fini=false;

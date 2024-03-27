@@ -80,9 +80,13 @@ public class VueControleur extends JFrame implements Observer {
                     case KeyEvent.VK_UP : jeu.deplacerHeros(Direction.haut);break;
                     case KeyEvent.VK_ESCAPE:System.exit(0);
 
+
                 }
                 if(jeu.jeu_fini==true)
                     System.out.println("fini");
+                if(jeu.GetNiveaux() == 6)
+                    System.exit(0);
+
                 //JOptionPane.showMessageDialog(null, "Ceci est un message d'information.");
 
             }
@@ -91,11 +95,11 @@ public class VueControleur extends JFrame implements Observer {
 
 
     private void chargerLesIcones() {
-        icoHero = chargerIcone("Images/Perso.png");
+        icoHero = chargerIcone("Images/Perso.jpg");
         icoVide = chargerIcone("Images/Vide.png");
         icoMur = chargerIcone("Images/Mur.png");
-        icoBloc = chargerIcone("Images/Colonne.png");
-        icoVictoire = chargerIcone("Images/Victoire.jpg");
+        icoBloc = chargerIcone("Images/Bloc.jpg");
+        icoVictoire = chargerIcone("Images/But.jpg");
     }
 
     private ImageIcon chargerIcone(String urlIcone) {
@@ -113,7 +117,7 @@ public class VueControleur extends JFrame implements Observer {
 
     private void placerLesComposantsGraphiques() {
         setTitle("Sokoban");
-        setSize(10000, 500);
+        setSize(700, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
 
         JComponent grilleJLabels = new JPanel(new GridLayout(sizeY, sizeX)); // grilleJLabels va contenir les cases graphiques et les positionner sous la forme d'une grille
