@@ -48,8 +48,6 @@ public class Tool {
                 }
 
             }
-            System.out.println(taille_x);
-            System.out.println(taille_y);
             _jeu_a_init.Jeu_init_avec_tab(taille_x,taille_y,tab_case);
 
         } catch (IOException e) {
