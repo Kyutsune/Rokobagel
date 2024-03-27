@@ -24,7 +24,7 @@ public class Jeu extends Observable {
 
 
     private int atteindre_but = 0;
-    private int nombre_but = 2;
+    private int nombre_but = 0;
     private List<Entite> tab_entite_but;
 
     public void setNombre_but(int nombre_but) {
@@ -34,8 +34,6 @@ public class Jeu extends Observable {
     private Heros heros;
 
     private Tool t;
-
-    private Niveaux niveaux;
 
     private HashMap<Case, Point> map = new  HashMap<Case, Point>(); // permet de récupérer la position d'une case à partir de sa référence
     private Case[][] grilleEntites = new Case[SIZE_X][SIZE_Y]; // permet de récupérer une case à partir de ses coordonnées
@@ -119,6 +117,8 @@ public class Jeu extends Observable {
 
     private void initialisationNiveau_a_partir_fichier(String m_ter[][]) {
 
+
+        Bloc[] tableauDeBlocs = new Bloc[nombre_but];
         for(int x=0;x<this.SIZE_X;++x)
             for(int y=0;y<SIZE_Y;++y)
             {
@@ -127,8 +127,13 @@ public class Jeu extends Observable {
                     case "#": addCase(new Mur(this), x, y); break;
                     case ".": addCase(new Vide(this), x, y); break;
                     case "h": heros = new Heros(this,grilleEntites[x][y]); break;
+                    case "f": addCase(new But(this),x,y);setNombre_but(nombre_but+1);break;
+                    case "b": new Bloc(this,grilleEntites[x][y]); break;
                 }
             }
+        System.out.println(nombre_but);
+        System.out.println(atteindre_but);
+
     }
 
 
@@ -237,16 +242,13 @@ public class Jeu extends Observable {
             System.out.println(atteindre_but);
             tab_entite_but.add(b);
         }
+        if(atteindre_but == nombre_but)
+            jeu_fini = true;
+        else
+            jeu_fini=false;
 
-    if(atteindre_but == nombre_but) {
-        jeu_fini = true;
-        niveaux.Changer_niveau();
+
+        return;
     }
-    else
-        jeu_fini=false;
-
-
-    return;
-}
 
 }
