@@ -12,7 +12,7 @@ public class Tool {
 
     public Tool(int Niveaux_numero,Jeu jeu_a_init)
     {
-        lecture_fichier("Niveaux/Niveau_" + Niveaux_numero + "/" , jeu_a_init);
+        lecture_fichier(this.creation_nom_fichier(Niveaux_numero), jeu_a_init);
     }
 
 
@@ -54,5 +54,10 @@ public class Tool {
             System.err.println("Erreur de lecture du fichier : " + e.getMessage());
         }
 
+    }
+
+
+    public String creation_nom_fichier(int niveau_a_charger){
+        return ("Niveaux/Niveau_" + niveau_a_charger);
     }
 }

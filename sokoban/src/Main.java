@@ -14,9 +14,6 @@ public class Main {
     public static void main(String[] args) {
         Jeu jeu = new Jeu();
 
-        //Pour utiliser la recup de niveau dans un fichier
-        Niveaux niveaux= new Niveaux(jeu);
-
         VueControleur vc = new VueControleur(jeu);
         vc.setVisible(true);
 

@@ -35,14 +35,18 @@ public class Jeu extends Observable {
 
     private Tool t;
 
+
     private HashMap<Case, Point> map = new  HashMap<Case, Point>(); // permet de récupérer la position d'une case à partir de sa référence
     private Case[][] grilleEntites = new Case[SIZE_X][SIZE_Y]; // permet de récupérer une case à partir de ses coordonnées
 
+
+    private Niveaux niveaux;
 
 
     public Jeu() {
         tab_entite_but=new ArrayList<>();
         initialisationNiveau();
+        niveaux = new Niveaux(this);
     }
 
     public void Jeu_init_avec_tab(int taille_x,int taille_y,String tab_terrain[][])
@@ -242,8 +246,10 @@ public class Jeu extends Observable {
             System.out.println(atteindre_but);
             tab_entite_but.add(b);
         }
-        if(atteindre_but == nombre_but)
+        if(atteindre_but == nombre_but) {
             jeu_fini = true;
+            niveaux.Changer_niveau(this);
+        }
         else
             jeu_fini=false;
 
