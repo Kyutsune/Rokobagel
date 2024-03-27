@@ -24,7 +24,7 @@ public class Jeu extends Observable {
 
 
     private int atteindre_but = 0;
-    private int nombre_but = 0;
+    private int nombre_but = 2;
     private List<Entite> tab_entite_but;
 
     public void setNombre_but(int nombre_but) {
@@ -34,6 +34,8 @@ public class Jeu extends Observable {
     private Heros heros;
 
     private Tool t;
+
+    private Niveaux niveaux;
 
     private HashMap<Case, Point> map = new  HashMap<Case, Point>(); // permet de récupérer la position d'une case à partir de sa référence
     private Case[][] grilleEntites = new Case[SIZE_X][SIZE_Y]; // permet de récupérer une case à partir de ses coordonnées
@@ -53,11 +55,11 @@ public class Jeu extends Observable {
     }
 
 
-    
+
     public Case[][] getGrille() {
         return grilleEntites;
     }
-    
+
     public Heros getHeros() {
         return heros;
     }
@@ -68,7 +70,7 @@ public class Jeu extends Observable {
         notifyObservers();
     }
 
-    
+
     private void initialisationNiveau() {
         // murs extérieurs horizontaux
         for (int x = 0; x < SIZE_X; x++) {
@@ -117,8 +119,6 @@ public class Jeu extends Observable {
 
     private void initialisationNiveau_a_partir_fichier(String m_ter[][]) {
 
-
-        Bloc[] tableauDeBlocs = new Bloc[nombre_but];
         for(int x=0;x<this.SIZE_X;++x)
             for(int y=0;y<SIZE_Y;++y)
             {
@@ -127,13 +127,8 @@ public class Jeu extends Observable {
                     case "#": addCase(new Mur(this), x, y); break;
                     case ".": addCase(new Vide(this), x, y); break;
                     case "h": heros = new Heros(this,grilleEntites[x][y]); break;
-                    case "f": addCase(new But(this),x,y);setNombre_but(nombre_but+1);break;
-                    case "b": new Bloc(this,grilleEntites[x][y]); break;
                 }
             }
-        System.out.println(nombre_but);
-        System.out.println(atteindre_but);
-
     }
 
 
@@ -156,17 +151,17 @@ public class Jeu extends Observable {
         grilleEntites[x][y] = e;
         map.put(e, new Point(x, y));
     }
-    
 
-    
+
+
     /** Si le déplacement de l'entité est autorisé (pas de mur ou autre entité), il est réalisé
      * Sinon, rien n'est fait.
      */
     public boolean deplacerEntite(Entite e, Direction d) {
         boolean retour = true;
-        
+
         Point pCourant = map.get(e.getCase());
-        
+
         Point pCible = calculerPointCible(pCourant, d);
 
         if (contenuDansGrille(pCible)) {
@@ -196,37 +191,37 @@ public class Jeu extends Observable {
 
         return retour;
     }
-    
-    
+
+
     private Point calculerPointCible(Point pCourant, Direction d) {
         Point pCible = null;
-        
+
         switch(d) {
             case haut: pCible = new Point(pCourant.x, pCourant.y - 1); break;
             case bas : pCible = new Point(pCourant.x, pCourant.y + 1); break;
             case gauche : pCible = new Point(pCourant.x - 1, pCourant.y); break;
-            case droite : pCible = new Point(pCourant.x + 1, pCourant.y); break;     
-            
+            case droite : pCible = new Point(pCourant.x + 1, pCourant.y); break;
+
         }
-        
+
         return pCible;
     }
-    
 
-    
+
+
     /** Indique si p est contenu dans la grille
      */
     private boolean contenuDansGrille(Point p) {
         return p.x >= 0 && p.x < SIZE_X && p.y >= 0 && p.y < SIZE_Y;
     }
-    
+
     private Case caseALaPosition(Point p) {
         Case retour = null;
-        
+
         if (contenuDansGrille(p)) {
             retour = grilleEntites[p.x][p.y];
         }
-        
+
         return retour;
     }
 
@@ -242,13 +237,15 @@ public class Jeu extends Observable {
             System.out.println(atteindre_but);
             tab_entite_but.add(b);
         }
-        if(atteindre_but == nombre_but)
-            jeu_fini = true;
-        else
-            jeu_fini=false;
+    if(atteindre_but == nombre_but)
+    {
+        jeu_fini = true;
+        niveaux.Changer_niveau();
+    else
+        jeu_fini=false;
 
 
     return;
-    }
+}
 
 }
