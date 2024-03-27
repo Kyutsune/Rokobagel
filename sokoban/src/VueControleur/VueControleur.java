@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.JOptionPane;
 
 
 import modele.*;
@@ -79,11 +80,11 @@ public class VueControleur extends JFrame implements Observer {
                     case KeyEvent.VK_UP : jeu.deplacerHeros(Direction.haut);break;
                     case KeyEvent.VK_ESCAPE:System.exit(0);
 
-
-
                 }
                 if(jeu.jeu_fini==true)
                     System.out.println("fini");
+                //JOptionPane.showMessageDialog(null, "Ceci est un message d'information.");
+
             }
         });
     }
