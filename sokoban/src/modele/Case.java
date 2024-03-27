@@ -42,5 +42,4 @@ public abstract class Case extends Obj {
         e = _e;
         e.setCase(this);}
 
-
    }

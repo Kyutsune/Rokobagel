@@ -142,28 +142,13 @@ public class Jeu extends Observable {
                     case ".": addCase(new Vide(this),x,y);break;
                     case "h": heros = new Heros(this,grilleEntites[x][y]);System.out.println("Héro : "+x+y); break;
                     case "f": addCase(new But(this),x,y);setNombre_but(nombre_but+1);break;
+                    case "p": addCase(new Porte(this),x,y);break;
                     case "b": new Bloc(this,grilleEntites[x][y]); break;
                 }
             }
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void addCase(Case e, int x, int y) {
         grilleEntites[x][y] = e;
@@ -191,11 +176,24 @@ public class Jeu extends Observable {
                 if (caseALaPosition(pCible) instanceof Vide)
                     eCible.pousser(d);
 
-
-
-
-
             }
+            if(caseALaPosition(pCourant) instanceof Porte)
+            {
+                Case precedente = caseALaPosition(pCourant);
+                for(int x=0;x<this.SIZE_X;++x) {
+                    for (int y = 0; y < this.SIZE_Y; ++y) {
+                        if (grilleEntites[x][y] instanceof Porte && grilleEntites[x][y] != precedente) {
+
+                            System.out.println(grilleEntites[x][y]);
+                            grilleEntites[x][y].setEntite(precedente.getEntite());
+
+                            grilleEntites[x][y].quitterLaCase();
+
+                        }
+                    }
+                }
+            }
+
 
 
             // si la case est libérée
@@ -290,13 +288,6 @@ public class Jeu extends Observable {
 
 
     public void viderGrille() {
-        //for (int i = 0; i < SIZE_X; i++) {
-        //    for (int j = 0; j < SIZE_Y; j++) {
-        //        grilleEntites[i][j] = new Vide(this);
-        //    }
-        //}
         grilleEntites=new Case[SIZE_X][SIZE_Y];
-
-
     }
 }
