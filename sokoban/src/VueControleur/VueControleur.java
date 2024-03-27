@@ -40,10 +40,14 @@ public class VueControleur extends JFrame implements Observer {
 
     private JLabel[][] tabJLabel; // cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
 
-
-    public VueControleur(Jeu _jeu) {
+    public void InitialiserTailleTerrain(Jeu _jeu)
+    {
         sizeX = _jeu.SIZE_X;
         sizeY = _jeu.SIZE_Y;
+    }
+
+    public VueControleur(Jeu _jeu) {
+        InitialiserTailleTerrain(_jeu);
         jeu = _jeu;
 
         //demanderNombreBut();
@@ -116,6 +120,8 @@ public class VueControleur extends JFrame implements Observer {
     }
 
     private void placerLesComposantsGraphiques() {
+        InitialiserTailleTerrain(this.jeu);
+
         setTitle("Sokoban");
         setSize(700, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
@@ -141,6 +147,7 @@ public class VueControleur extends JFrame implements Observer {
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
      */
     private void mettreAJourAffichage() {
+        InitialiserTailleTerrain(this.jeu);
 
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
@@ -179,6 +186,7 @@ public class VueControleur extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        placerLesComposantsGraphiques();
         mettreAJourAffichage();
         /*
 

@@ -17,8 +17,8 @@ import java.util.List;
 
 public class Jeu extends Observable {
 
-    public static int SIZE_X = 7;
-    public static int SIZE_Y = 8;
+    public static int SIZE_X;
+    public static int SIZE_Y;
 
     public boolean jeu_fini=false;
 
@@ -53,7 +53,6 @@ public class Jeu extends Observable {
     {
         this.SIZE_X=taille_x;
         this.SIZE_Y=taille_y;
-        System.out.println(SIZE_X+SIZE_Y);
         initialisationNiveau_a_partir_fichier(tab_terrain);
     }
 
@@ -81,7 +80,7 @@ public class Jeu extends Observable {
         // murs extérieurs horizontaux
         for (int x = 0; x < SIZE_X; x++) {
             addCase(new Mur(this), x, 0);
-            addCase(new Mur(this), x, SIZE_Y-1);
+            addCase(new Mur(this), x, SIZE_Y - 1);
         }
 
         // murs extérieurs verticaux
@@ -135,7 +134,7 @@ public class Jeu extends Observable {
 
 
         for(int x=0;x<this.SIZE_X;++x)
-            for(int y=0;y<SIZE_Y;++y)
+            for(int y=0;y<this.SIZE_Y;++y)
             {
                 switch(m_ter[x][y])
                 {
@@ -146,9 +145,7 @@ public class Jeu extends Observable {
                     case "b": new Bloc(this,grilleEntites[x][y]); break;
                 }
             }
-        System.out.println(nombre_but);
-        System.out.println(atteindre_but);
-        System.out.println(heros.getCase());
+
 
     }
 
@@ -187,7 +184,6 @@ public class Jeu extends Observable {
 
         if (contenuDansGrille(pCible)) {
             Entite eCible = caseALaPosition(pCible).getEntite();
-            System.out.println(eCible==null);
             Entite eCourant = caseALaPosition(pCourant).getEntite();
 
             if (eCible != null && eCible instanceof Bloc) {
@@ -266,7 +262,6 @@ public class Jeu extends Observable {
     {
         if(b.getCase() instanceof But && !pas_deja_validee(b)) {
             atteindre_but++;
-            System.out.println(atteindre_but);
             tab_entite_but.add(b);
         }
         if(atteindre_but == nombre_but) {

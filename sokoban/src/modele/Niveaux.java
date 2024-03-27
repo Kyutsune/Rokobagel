@@ -11,7 +11,8 @@ public class Niveaux  {
     public void Changer_niveau(Jeu jeu_en_entree)
     {
         niveau_actuel++;
-        t.lecture_fichier(t.creation_nom_fichier(niveau_actuel),jeu_en_entree);
+        if(niveau_actuel<6)
+            t.lecture_fichier(t.creation_nom_fichier(niveau_actuel),jeu_en_entree);
     }
 
 
