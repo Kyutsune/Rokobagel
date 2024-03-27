@@ -237,10 +237,11 @@ public class Jeu extends Observable {
             System.out.println(atteindre_but);
             tab_entite_but.add(b);
         }
-    if(atteindre_but == nombre_but)
-    {
+
+    if(atteindre_but == nombre_but) {
         jeu_fini = true;
         niveaux.Changer_niveau();
+    }
     else
         jeu_fini=false;
 

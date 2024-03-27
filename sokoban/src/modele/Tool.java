@@ -10,9 +10,9 @@ public class Tool {
 
     }
 
-    public Tool(Jeu jeu_a_init)
+    public Tool(int Niveaux_numero,Jeu jeu_a_init)
     {
-        lecture_fichier("Niveaux/Niveau_1",jeu_a_init);
+        lecture_fichier("Niveaux/Niveau_" + Niveaux_numero + "/" , jeu_a_init);
     }
 
 

@@ -137,8 +137,6 @@ public class VueControleur extends JFrame implements Observer {
      */
     private void mettreAJourAffichage() {
 
-
-
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
 
