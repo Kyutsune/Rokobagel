@@ -69,10 +69,11 @@ public class Jeu extends Observable {
         return heros;
     }
 
-    public void deplacerHeros(Direction d) {
-        heros.avancerDirectionChoisie(d);
+    public boolean deplacerHeros(Direction d) {
+        boolean reponse=heros.avancerDirectionChoisie(d);
         setChanged();
         notifyObservers();
+        return reponse;
     }
 
 
