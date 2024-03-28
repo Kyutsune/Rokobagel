@@ -140,7 +140,7 @@ public class Jeu extends Observable {
                 {
                     case "#": addCase(new Mur(this), x, y); break;
                     case ".": addCase(new Vide(this),x,y);break;
-                    case "h": heros = new Heros(this,grilleEntites[x][y]);System.out.println("Héro : "+x+y); break;
+                    case "h": heros = new Heros(this,grilleEntites[x][y]); break;
                     case "f": addCase(new But(this),x,y);setNombre_but(nombre_but+1);break;
                     case "p": addCase(new Porte(this),x,y);break;
                     case "b": new Bloc(this,grilleEntites[x][y]); break;
@@ -162,6 +162,7 @@ public class Jeu extends Observable {
      */
     public boolean deplacerEntite(Entite e, Direction d) {
         boolean retour = true;
+        boolean tp=false;
 
         Point pCourant = map.get(e.getCase());
 
@@ -177,18 +178,17 @@ public class Jeu extends Observable {
                     eCible.pousser(d);
 
             }
-            if(caseALaPosition(pCourant) instanceof Porte)
+            if(caseALaPosition(pCible) instanceof Porte)
             {
-                Case precedente = caseALaPosition(pCourant);
+                Case precedente = caseALaPosition(pCible);
                 for(int x=0;x<this.SIZE_X;++x) {
                     for (int y = 0; y < this.SIZE_Y; ++y) {
                         if (grilleEntites[x][y] instanceof Porte && grilleEntites[x][y] != precedente) {
 
-                            System.out.println(grilleEntites[x][y]);
-                            grilleEntites[x][y].setEntite(precedente.getEntite());
+                            if(grilleEntites[x][y].getEntite()!=null)
+                                grilleEntites[x][y].getEntite().pousser(d);
 
-                            grilleEntites[x][y].quitterLaCase();
-
+                            pCible=new Point(x, y);
                         }
                     }
                 }
@@ -215,7 +215,6 @@ public class Jeu extends Observable {
 
 
         return retour;
-
     }
 
 
