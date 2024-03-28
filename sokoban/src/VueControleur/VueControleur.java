@@ -106,7 +106,7 @@ public class VueControleur extends JFrame implements Observer {
         icoMur = chargerIcone("Images/Mur.png");
         icoBloc = chargerIcone("Images/Bloc.jpg");
         icoVictoire = chargerIcone("Images/But.jpg");
-        icoPorte = chargerIcone("Images/Perso.png");
+        icoPorte = chargerIcone("Images/Porte.jpg");
     }
 
     private ImageIcon chargerIcone(String urlIcone) {
