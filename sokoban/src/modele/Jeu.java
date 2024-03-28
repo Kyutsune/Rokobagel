@@ -189,7 +189,6 @@ public class Jeu extends Observable {
                                 grilleEntites[x][y].getEntite().pousser(d);
 
                             pCible=new Point(x, y);
-
                         }
                     }
                 }
