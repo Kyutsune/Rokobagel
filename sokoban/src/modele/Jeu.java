@@ -77,6 +77,7 @@ public class Jeu extends Observable {
 
 
     private void initialisationNiveau() {
+        nombre_but=0;atteindre_but=0;
         // murs extérieurs horizontaux
         for (int x = 0; x < SIZE_X; x++) {
             addCase(new Mur(this), x, 0);
@@ -127,6 +128,7 @@ public class Jeu extends Observable {
         initialisationNiveau();
 
         jeu_fini = false;
+
 
 
 
@@ -253,6 +255,11 @@ public class Jeu extends Observable {
     public boolean pas_deja_validee(Entite b)
     {
         return tab_entite_but.contains(b);
+    }
+
+    public void Recharger_niveau()
+    {
+        niveaux.Recharger_niveau(this);
     }
 
     public void partie_terminee(Entite b)
