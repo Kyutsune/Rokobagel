@@ -184,12 +184,11 @@ public class Jeu extends Observable {
                 for(int x=0;x<this.SIZE_X;++x) {
                     for (int y = 0; y < this.SIZE_Y; ++y) {
                         if (grilleEntites[x][y] instanceof Porte && grilleEntites[x][y] != precedente) {
-                            System.out.println("Position en x= "+x+" Position en y = "+y);
+
+                            if(grilleEntites[x][y].getEntite()!=null)
+                                grilleEntites[x][y].getEntite().pousser(d);
+
                             pCible=new Point(x, y);
-
-                            //e.getCase().quitterLaCase();
-                            //caseALaPosition(p_tp).entrerSurLaCase(e);
-
 
                         }
                     }
