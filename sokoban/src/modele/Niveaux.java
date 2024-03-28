@@ -15,5 +15,10 @@ public class Niveaux  {
             t.lecture_fichier(t.creation_nom_fichier(niveau_actuel),jeu_en_entree);
     }
 
+    public void Recharger_niveau(Jeu jeu_en_entree)
+    {
+        t.lecture_fichier(t.creation_nom_fichier(niveau_actuel),jeu_en_entree);
+    }
+
 
 }
