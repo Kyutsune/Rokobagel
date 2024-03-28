@@ -16,6 +16,7 @@ public class Son {
     private AudioInputStream tir_converted;
 
 
+
     public void jouerSon(String songFilename) {
         try {
             // Vérifier si un clip est en cours de lecture
