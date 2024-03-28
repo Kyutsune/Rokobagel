@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+
 import javax.swing.JOptionPane;
 
 
@@ -41,6 +43,10 @@ public class VueControleur extends JFrame implements Observer {
 
 
     private JLabel[][] tabJLabel; // cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
+
+    private Son son_jeu=new Son();
+
+
 
     public void InitialiserTailleTerrain(Jeu _jeu)
     {
@@ -80,16 +86,39 @@ public class VueControleur extends JFrame implements Observer {
 
 
 
-                    case KeyEvent.VK_LEFT : jeu.deplacerHeros(Direction.gauche); break;
-                    case KeyEvent.VK_RIGHT : jeu.deplacerHeros(Direction.droite); break;
-                    case KeyEvent.VK_DOWN : jeu.deplacerHeros(Direction.bas); break;
-                    case KeyEvent.VK_UP : jeu.deplacerHeros(Direction.haut);break;
-                    case KeyEvent.VK_R: jeu.Recharger_niveau();mettreAJourAffichage();break;
-                    case KeyEvent.VK_ESCAPE:System.exit(0);
+                    case KeyEvent.VK_LEFT :
+                        if(jeu.deplacerHeros(Direction.gauche))
+                            son_jeu.jouerSon("Banque_son/Chien.wav");
+                        break;
+
+                    case KeyEvent.VK_RIGHT :
+                        if(jeu.deplacerHeros(Direction.droite))
+                            son_jeu.jouerSon("Banque_son/Ting.wav");
+                        break;
+
+                    case KeyEvent.VK_DOWN :
+                        if(jeu.deplacerHeros(Direction.bas))
+                            son_jeu.jouerSon("Banque_son/Ting.wav");
+                        break;
+
+                    case KeyEvent.VK_UP :
+                        //deplacement=jeu.deplacerHeros(Direction.haut);
+                        if(jeu.deplacerHeros(Direction.haut))
+                            son_jeu.jouerSon("Banque_son/Son_coq.wav");
+                        break;
+
+                    case KeyEvent.VK_R:
+                        jeu.Recharger_niveau();
+                        mettreAJourAffichage();
+                        break;
+
+                    case KeyEvent.VK_ESCAPE:
+                        System.exit(0);
+                        break;
 
 
                 }
-                if(jeu.jeu_fini==true)
+                if(jeu.jeu_fini)
                     System.out.println("fini");
                 if(jeu.GetNiveaux() == 6)
                     System.exit(0);
@@ -182,8 +211,6 @@ public class VueControleur extends JFrame implements Observer {
                             tabJLabel[x][y].setIcon(icoVictoire);
                         }
                     }
-
-
 
                 }
 
