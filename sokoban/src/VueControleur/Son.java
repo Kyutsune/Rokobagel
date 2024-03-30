@@ -9,12 +9,11 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
+
 public class Son {
 
     private Clip clip;
-
-    private AudioInputStream tir_converted;
-
 
     public void jouerSon(String songFilename) {
         try {
@@ -24,34 +23,23 @@ public class Son {
                 clip.close(); // Fermer le clip en cours
             }
 
-
+            // Charger le fichier audio
             File f = new File(songFilename);
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(f);
 
-            AudioFormat baseFormat = audioIn.getFormat();
-
-            // Convertir le format du fichier audio si nécessaire
-            AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
-                    baseFormat.getSampleRate(),
-                    16,
-                    baseFormat.getChannels(),
-                    baseFormat.getChannels() * 2,
-                    baseFormat.getSampleRate(),
-                    false);
-            AudioInputStream convertedIn = AudioSystem.getAudioInputStream(targetFormat, audioIn);
 
             // Ouvrir le clip avec le fichier audio converti
             clip = AudioSystem.getClip();
-            clip.open(convertedIn);
+            clip.open(audioIn);
 
+            // Démarrer la lecture du clip
             clip.start();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-
     }
+
+
+
 }
+
