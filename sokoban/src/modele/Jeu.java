@@ -37,12 +37,13 @@ public class Jeu extends Observable {
 
 
     private HashMap<Case, Point> map = new  HashMap<Case, Point>(); // permet de récupérer la position d'une case à partir de sa référence
+
     private Case[][] grilleEntites = new Case[SIZE_X][SIZE_Y]; // permet de récupérer une case à partir de ses coordonnées
 
 
     private Niveaux niveaux;
 
-
+    
     public Jeu() {
         tab_entite_but=new ArrayList<>();
         initialisationNiveau();
@@ -147,6 +148,9 @@ public class Jeu extends Observable {
                     case "f": addCase(new But(this),x,y);setNombre_but(nombre_but+1);break;
                     case "p": addCase(new Porte(this),x,y);break;
                     case "b": new Bloc(this,grilleEntites[x][y]); break;
+                    case "g": addCase(new Grille(this),x,y);break;
+                    case "B": addCase(new Bouton(this),x,y);break;
+
                 }
             }
 
@@ -163,6 +167,13 @@ public class Jeu extends Observable {
 /** Si le déplacement d2e l'entité est autorisé (pas de mur ou autre entité), il est réalisé
      * Sinon, rien n'est fait.
      */
+
+    public boolean recupereEtatGrille()
+    {
+        Grille g = null;
+        return g.isEtat_grille();
+    }
+    
     public boolean deplacerEntite(Entite e, Direction d) {
         boolean retour = true;
         boolean tp=false;
@@ -193,9 +204,27 @@ public class Jeu extends Observable {
 
                             pCible=new Point(x, y);
                         }
+
                     }
                 }
             }
+
+
+
+            for(int x=0;x<this.SIZE_X;++x) {
+                for (int y = 0; y < this.SIZE_Y; ++y) {
+                    if(caseALaPosition(pCible) instanceof Bouton) {
+                        if (grilleEntites[x][y] instanceof Grille) {
+                            ((Grille) grilleEntites[x][y]).setEtat_grille(true);
+                        }
+                    }
+                }
+
+            }
+
+
+
+
 
 
 
