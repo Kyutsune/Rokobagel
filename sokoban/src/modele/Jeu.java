@@ -22,7 +22,7 @@ public class Jeu extends Observable {
 
     public boolean jeu_fini=false;
 
-
+    private Case tab_bloc;
     private int atteindre_but = 0;
     private int nombre_but = 0;
     private List<Entite> tab_entite_but;
@@ -210,19 +210,29 @@ public class Jeu extends Observable {
             }
 
 
-
             for(int x=0;x<this.SIZE_X;++x) {
                 for (int y = 0; y < this.SIZE_Y; ++y) {
+                    Case case_bloc_sur_bouton = null;
+
                     if(caseALaPosition(pCible) instanceof Bouton) {
+                        sauvegarde_valeure(grilleEntites[x][y]) ;
                         if (grilleEntites[x][y] instanceof Grille) {
                             ((Grille) grilleEntites[x][y]).setEtat_grille(true);
+                        }
+
+                    }
+
+                    if(caseALaPosition(pCible) instanceof Vide)
+                    {
+                        //System.out.println(tab_bloc.getEntite());
+                        if (grilleEntites[x][y] instanceof Grille && !(tab_bloc.getEntite() instanceof Bloc)) {
+
+                            ((Grille) grilleEntites[x][y]).setEtat_grille(false);
                         }
                     }
                 }
 
             }
-
-
 
 
 
@@ -249,7 +259,10 @@ public class Jeu extends Observable {
         return retour;
     }
 
-
+    public void sauvegarde_valeure(Case c)
+    {
+        tab_bloc = c;
+    }
     private Point calculerPointCible(Point pCourant, Direction d) {
         Point pCible = null;
 
