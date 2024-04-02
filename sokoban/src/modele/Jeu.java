@@ -221,15 +221,17 @@ public class Jeu extends Observable {
                         }
 
                     }
-
+                    /*
                     if(caseALaPosition(pCible) instanceof Vide)
                     {
                         //System.out.println(tab_bloc.getEntite());
-                        if (grilleEntites[x][y] instanceof Grille && !(tab_bloc.getEntite() instanceof Bloc)) {
+                        if (grilleEntites[x][y] instanceof Grille ) {
 
                             ((Grille) grilleEntites[x][y]).setEtat_grille(false);
                         }
                     }
+
+                     */
                 }
 
             }
