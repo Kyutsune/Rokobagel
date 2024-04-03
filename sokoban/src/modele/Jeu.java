@@ -190,7 +190,6 @@ public class Jeu extends Observable {
                 // On peut pousser le bloc que si la cible est du vide
                 if (caseALaPosition(pCible) instanceof Vide)
                     eCible.pousser(d);
-
             }
             if(caseALaPosition(pCible) instanceof Porte)
             {
@@ -255,11 +254,6 @@ public class Jeu extends Observable {
 
         return retour;
     }
-
-    public void sauvegarde_valeure(Case c)
-    {
-        tab_bloc = c;
-    }
     private Point calculerPointCible(Point pCourant, Direction d) {
         Point pCible = null;
 
@@ -322,15 +316,6 @@ public class Jeu extends Observable {
 
         return;
     }
-    public void vider()
-    {
-        for(int i = 0 ; i<SIZE_X;i++)
-        {
-            for(int j = 0 ; j<SIZE_Y;j++)
-                addCase(new Vide(this), i, j);
-        }
-    }
-
 
 
     public void viderGrille() {
