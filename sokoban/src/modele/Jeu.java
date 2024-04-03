@@ -212,7 +212,6 @@ public class Jeu extends Observable {
 
             for(int x=0;x<this.SIZE_X;++x) {
                 for (int y = 0; y < this.SIZE_Y; ++y) {
-                    Case case_bloc_sur_bouton = null;
 
                     if(caseALaPosition(pCible) instanceof Bouton) {
                         sauvegarde_valeure(grilleEntites[x][y]) ;
@@ -221,14 +220,13 @@ public class Jeu extends Observable {
                         }
 
                     }
+                    //System.out.println(tab_bloc.getEntite());
                     /*
-                    if(caseALaPosition(pCible) instanceof Vide)
-                    {
-                        //System.out.println(tab_bloc.getEntite());
-                        if (grilleEntites[x][y] instanceof Grille ) {
-
+                    if (grilleEntites[x][y] instanceof Grille ) {
+                        if (tab_bloc.getEntite() instanceof Bloc) {
                             ((Grille) grilleEntites[x][y]).setEtat_grille(false);
                         }
+
                     }
 
                      */
