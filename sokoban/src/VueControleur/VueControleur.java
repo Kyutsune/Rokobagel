@@ -100,7 +100,6 @@ public class VueControleur extends JFrame implements Observer {
                         break;
 
                     case KeyEvent.VK_UP :
-                        //deplacement=jeu.deplacerHeros(Direction.haut);
                         if(jeu.deplacerHeros(Direction.haut))
                             son_jeu.jouerSon("Banque_son/Pas.wav");
                         break;
