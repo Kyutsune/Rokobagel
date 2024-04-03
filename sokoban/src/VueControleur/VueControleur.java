@@ -91,23 +91,23 @@ public class VueControleur extends JFrame implements Observer {
 
                     case KeyEvent.VK_LEFT :
                         if(jeu.deplacerHeros(Direction.gauche))
-                            son_jeu.jouerSon("Banque_son/Bang.wav");
+                            son_jeu.jouerSon("Banque_son/Pas.wav");
                         break;
 
                     case KeyEvent.VK_RIGHT :
                         if(jeu.deplacerHeros(Direction.droite))
-                            son_jeu.jouerSon("Banque_son/Ting.wav");
+                            son_jeu.jouerSon("Banque_son/Pas.wav");
                         break;
 
                     case KeyEvent.VK_DOWN :
                         if(jeu.deplacerHeros(Direction.bas))
-                            son_jeu.jouerSon("Banque_son/Ting.wav");
+                            son_jeu.jouerSon("Banque_son/Pas.wav");
                         break;
 
                     case KeyEvent.VK_UP :
                         //deplacement=jeu.deplacerHeros(Direction.haut);
                         if(jeu.deplacerHeros(Direction.haut))
-                            son_jeu.jouerSon("Banque_son/Son_coq.wav");
+                            son_jeu.jouerSon("Banque_son/Pas.wav");
                         break;
 
                     case KeyEvent.VK_R:
