@@ -214,22 +214,19 @@ public class Jeu extends Observable {
                 for (int y = 0; y < this.SIZE_Y; ++y) {
 
                     if(caseALaPosition(pCible) instanceof Bouton) {
-                        sauvegarde_valeure(grilleEntites[x][y]) ;
                         if (grilleEntites[x][y] instanceof Grille) {
                             ((Grille) grilleEntites[x][y]).setEtat_grille(true);
                         }
 
                     }
-                    //System.out.println(tab_bloc.getEntite());
-                    /*
-                    if (grilleEntites[x][y] instanceof Grille ) {
-                        if (tab_bloc.getEntite() instanceof Bloc) {
+
+                    if(caseALaPosition(pCourant) instanceof Bouton) {
+                        if (grilleEntites[x][y] instanceof Grille) {
                             ((Grille) grilleEntites[x][y]).setEtat_grille(false);
                         }
 
                     }
 
-                     */
                 }
 
             }

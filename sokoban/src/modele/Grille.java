@@ -3,8 +3,8 @@ package modele;
 public class Grille extends Case {
 
     private boolean etat_grille = false;
-    public void setEtat_grille(boolean etat_grille) {
-        this.etat_grille = etat_grille;
+    public void setEtat_grille(boolean _etat_grille) {
+        this.etat_grille = _etat_grille;
     }
 
     public boolean isEtat_grille() {
