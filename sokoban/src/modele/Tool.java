@@ -2,6 +2,8 @@ package modele;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class Tool {
 
@@ -60,4 +62,38 @@ public class Tool {
     public String creation_nom_fichier(int niveau_a_charger){
         return ("Niveaux/Niveau_" + niveau_a_charger);
     }
+
+
+    public int recuperation_meilleur_score_niveau(int niveau_souhaité)
+    {
+        String nomFichier="Score/Niveau_"+niveau_souhaité;
+        String reponse="";
+        try (BufferedReader reader = new BufferedReader(new FileReader(nomFichier))) {
+
+            reponse = reader.readLine();
+
+        } catch (IOException e) {
+            System.err.println("Erreur de lecture du fichier : " + e.getMessage());
+        }
+        return Integer.parseInt(reponse);
+    }
+
+    public void Enregistre_score_dans_fichier(int niveau_souhaité, int score_a_enregistrer) {
+        String nomFichier = "Score/Niveau_" + niveau_souhaité; // Nom du fichier à créer ou à écrire
+
+        try {
+            FileWriter fileWriter = new FileWriter(nomFichier);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            bufferedWriter.write(Integer.toString(score_a_enregistrer));
+
+            bufferedWriter.close();
+
+            System.out.println("Score enregistré avec succès dans le fichier " + nomFichier);
+        } catch (IOException e) {
+            System.err.println("Erreur lors de l'enregistrement du score dans le fichier " + nomFichier);
+            e.printStackTrace();
+        }
+    }
+
 }
