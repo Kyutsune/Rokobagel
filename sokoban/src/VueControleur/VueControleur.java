@@ -42,6 +42,8 @@ public class VueControleur extends JFrame implements Observer {
     private ImageIcon icoPorte;
     private ImageIcon icoGrille;
 
+    private ImageIcon icoGrilleOuverte;
+
     private ImageIcon icoBouton;
 
 
@@ -141,6 +143,7 @@ public class VueControleur extends JFrame implements Observer {
         icoPorte = chargerIcone("Images/Porte.jpg");
         icoGrille = chargerIcone("Images/Grille.png");
         icoBouton = chargerIcone("Images/Bouton.jpg");
+        icoGrilleOuverte = chargerIcone("Images/Grille_ouverte.png");
     }
 
     private ImageIcon chargerIcone(String urlIcone) {
@@ -193,12 +196,15 @@ public class VueControleur extends JFrame implements Observer {
      * Il y a une grille du côté du modèle ( jeu.getGrille() ) et une grille du côté de la vue (tabJLabel)
      */
     private void mettreAJourAffichage() {
+
         InitialiserTailleTerrain(this.jeu);
+
 
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
 
                 Case c = jeu.getGrille()[x][y];
+
 
                 if (c != null) {
 
@@ -211,21 +217,22 @@ public class VueControleur extends JFrame implements Observer {
                             tabJLabel[x][y].setIcon(icoBloc);
                         }
                     } else {
+
                         if (jeu.getGrille()[x][y] instanceof Mur)
                             tabJLabel[x][y].setIcon(icoMur);
                         if (jeu.getGrille()[x][y] instanceof Vide)
                             tabJLabel[x][y].setIcon(icoVide);
                         if(jeu.getGrille()[x][y] instanceof Porte)
                             tabJLabel[x][y].setIcon(icoPorte);
-                        if(jeu.getGrille()[x][y] instanceof Grille){
+                        if(jeu.getGrille()[x][y] instanceof Grille && ((Grille) jeu.getGrille()[x][y]).isEtat_grille() == false) {
+                            System.out.println(((Grille) jeu.getGrille()[x][y]).isEtat_grille());
                             tabJLabel[x][y].setIcon(icoGrille);
-                            if(((Grille) jeu.getGrille()[x][y]).isEtat_grille());
-                            {
-                                System.out.println(((Grille) jeu.getGrille()[x][y]).isEtat_grille() == true);
-                                tabJLabel[x][y].setIcon(icoVide);
-                            }
-
                         }
+                        if(jeu.getGrille()[x][y] instanceof Grille && ((Grille) jeu.getGrille()[x][y]).isEtat_grille() == true) {
+                            System.out.println(((Grille) jeu.getGrille()[x][y]).isEtat_grille());
+                            tabJLabel[x][y].setIcon(icoGrilleOuverte);
+                        }
+
                         if(jeu.getGrille()[x][y] instanceof Bouton)
                             tabJLabel[x][y].setIcon(icoBouton);
                         else if (jeu.getGrille()[x][y] instanceof But) {

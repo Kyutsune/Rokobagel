@@ -193,7 +193,7 @@ public class Jeu extends Observable {
             Entite eCible = caseALaPosition(pCible).getEntite();
             Entite eCourant = caseALaPosition(pCourant).getEntite();
 
-            if (eCible != null && eCible instanceof Bloc) {
+                    if (eCible != null && eCible instanceof Bloc) {
                 // On peut pousser le bloc que si la cible est du vide
                 if (caseALaPosition(pCible) instanceof Vide || caseALaPosition(pCible) instanceof Bouton || caseALaPosition(pCible) instanceof Grille)
                     eCible.pousser(d);
@@ -223,6 +223,7 @@ public class Jeu extends Observable {
                             for (int y = 0; y < this.SIZE_Y; ++y) {
                                 if (grilleEntites[x][y] instanceof Grille) {
                                     ((Grille) grilleEntites[x][y]).setEtat_grille(true);
+
                                 }
                             }
                         }
