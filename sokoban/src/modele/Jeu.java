@@ -6,6 +6,8 @@
 package modele;
 
 
+import VueControleur.Son;
+
 import java.awt.Point;
 import java.nio.channels.AsynchronousByteChannel;
 import java.util.ArrayList;
@@ -45,6 +47,8 @@ public class Jeu extends Observable {
 
 
     private Niveaux niveaux;
+
+    private Son son_jeu=new Son();
 
     
     public Jeu() {
@@ -309,10 +313,12 @@ public class Jeu extends Observable {
         if(b.getCase() instanceof But && !pas_deja_validee(b)) {
             atteindre_but++;
             tab_entite_but.add(b);
+            son_jeu.jouerSon("Banque_son/Mort.wav");
         }
         if(atteindre_but == nombre_but) {
             jeu_fini = true;
             this.enregistre_score();
+
 
             niveaux.Changer_niveau(this);
             if (niveaux.niveau_actuel == 6) {

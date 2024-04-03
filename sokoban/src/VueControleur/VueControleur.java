@@ -94,7 +94,7 @@ public class VueControleur extends JFrame implements Observer {
 
                     case KeyEvent.VK_DOWN :
                         if(jeu.deplacerHeros(Direction.bas))
-                            son_jeu.jouerSon("Banque_son/Mort.wav");
+                            son_jeu.jouerSon("Banque_son/Pas.wav");
                         break;
 
                     case KeyEvent.VK_UP :
@@ -109,9 +109,8 @@ public class VueControleur extends JFrame implements Observer {
                         break;
 
                     case KeyEvent.VK_P:
-                        
+                        son_jeu.jouerSon("Banque_son/Mort.wav");
                         jeu.Passer_Niveau();
-
                         mettreAJourAffichage();
                         break;
 
@@ -230,7 +229,6 @@ public class VueControleur extends JFrame implements Observer {
                         if(jeu.getGrille()[x][y] instanceof Bouton)
                             tabJLabel[x][y].setIcon(icoBouton);
                         else if (jeu.getGrille()[x][y] instanceof But) {
-
                             tabJLabel[x][y].setIcon(icoVictoire);
                         }
                     }
