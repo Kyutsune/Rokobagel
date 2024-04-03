@@ -212,8 +212,8 @@ public class VueControleur extends JFrame implements Observer {
                             tabJLabel[x][y].setIcon(icoGrille);
                             if(((Grille) jeu.getGrille()[x][y]).isEtat_grille());
                             {
-                                //System.out.println(((Grille) jeu.getGrille()[x][y]).isEtat_grille() == true);
-                                //tabJLabel[x][y].setIcon(icoVide);
+                                System.out.println(((Grille) jeu.getGrille()[x][y]).isEtat_grille() == true);
+                                tabJLabel[x][y].setIcon(icoVide);
                             }
 
                         }

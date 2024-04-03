@@ -189,7 +189,7 @@ public class Jeu extends Observable {
 
             if (eCible != null && eCible instanceof Bloc) {
                 // On peut pousser le bloc que si la cible est du vide
-                if (caseALaPosition(pCible) instanceof Vide || caseALaPosition(pCible) instanceof Bouton)
+                if (caseALaPosition(pCible) instanceof Vide || caseALaPosition(pCible) instanceof Bouton || caseALaPosition(pCible) instanceof Grille)
                     eCible.pousser(d);
             }
             if(caseALaPosition(pCible) instanceof Porte)
