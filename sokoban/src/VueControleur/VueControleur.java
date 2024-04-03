@@ -50,6 +50,7 @@ public class VueControleur extends JFrame implements Observer {
     private JLabel[][] tabJLabel; // cases graphique (au moment du rafraichissement, chaque case va être associée à une icône, suivant ce qui est présent dans le modèle)
 
     private Son son_jeu=new Son();
+    private Tool t=new Tool();
 
 
 
@@ -73,14 +74,6 @@ public class VueControleur extends JFrame implements Observer {
         mettreAJourAffichage();
 
     }
-
-    private void demanderNombreBut()
-    {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Saisir le nombre de but (entier) : ");
-        int nbBut = scanner.nextInt();
-        jeu.setNombre_but(nbBut);
-    }
     private void ajouterEcouteurClavier() {
         addKeyListener(new KeyAdapter() { // new KeyAdapter() { ... } est une instance de classe anonyme, il s'agit d'un objet qui correspond au controleur dans MVC
             @Override
@@ -103,7 +96,7 @@ public class VueControleur extends JFrame implements Observer {
 
                     case KeyEvent.VK_DOWN :
                         if(jeu.deplacerHeros(Direction.bas))
-                            son_jeu.jouerSon("Banque_son/Pas.wav");
+                            son_jeu.jouerSon("Banque_son/Mort.wav");
                         break;
 
                     case KeyEvent.VK_UP :
@@ -114,6 +107,13 @@ public class VueControleur extends JFrame implements Observer {
 
                     case KeyEvent.VK_R:
                         jeu.Recharger_niveau();
+                        mettreAJourAffichage();
+                        break;
+
+                    case KeyEvent.VK_P:
+                        
+                        jeu.Passer_Niveau();
+
                         mettreAJourAffichage();
                         break;
 
@@ -165,22 +165,32 @@ public class VueControleur extends JFrame implements Observer {
 
         setTitle("Sokoban");
         setSize(700, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permet de terminer l'application à la fermeture de la fenêtre
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JComponent grilleJLabels = new JPanel(new GridLayout(sizeY, sizeX)); // grilleJLabels va contenir les cases graphiques et les positionner sous la forme d'une grille
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        int test = jeu.GetNiveaux();
+        String gestion_score="Score maximal obtenu à ce niveau : " + t.recuperation_meilleur_score_niveau(jeu.GetNiveaux())+ " Score actuel : " + jeu.Get_score_actuel();
+        JLabel scoreLabel = new JLabel(gestion_score);
+        panel.add(scoreLabel, BorderLayout.NORTH);
+
+
+        JComponent grilleJLabels = new JPanel(new GridLayout(sizeY, sizeX));
 
         tabJLabel = new JLabel[sizeX][sizeY];
-
 
         for (int y = 0; y < sizeY; y++) {
             for (int x = 0; x < sizeX; x++) {
                 JLabel jlab = new JLabel();
-                tabJLabel[x][y] = jlab; // on conserve les cases graphiques dans tabJLabel pour avoir un accès pratique à celles-ci (voir mettreAJourAffichage() )
-
+                tabJLabel[x][y] = jlab;
                 grilleJLabels.add(jlab);
             }
         }
-        add(grilleJLabels);
+
+        panel.add(grilleJLabels, BorderLayout.CENTER);
+
+        add(panel);
     }
 
   /**

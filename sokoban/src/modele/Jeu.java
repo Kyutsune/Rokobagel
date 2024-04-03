@@ -28,13 +28,15 @@ public class Jeu extends Observable {
     private int nombre_but = 0;
     private List<Entite> tab_entite_but;
 
+    private int nombre_pas;
+
     public void setNombre_but(int nombre_but) {
         this.nombre_but = nombre_but;
     }
 
     private Heros heros;
 
-    private Tool t;
+    public Tool t=new Tool();
 
 
     private HashMap<Case, Point> map = new  HashMap<Case, Point>(); // permet de récupérer la position d'une case à partir de sa référence
@@ -80,7 +82,7 @@ public class Jeu extends Observable {
 
 
     private void initialisationNiveau() {
-        nombre_but=0;atteindre_but=0;
+        nombre_but=0;atteindre_but=0;nombre_pas=0;
         // murs extérieurs horizontaux
         for (int x = 0; x < SIZE_X; x++) {
             addCase(new Mur(this), x, 0);
@@ -237,7 +239,8 @@ public class Jeu extends Observable {
 
 
 
-
+            if(eCourant instanceof Heros)
+                nombre_pas++;
 
 
 
@@ -257,7 +260,6 @@ public class Jeu extends Observable {
 
         } else
             retour = false;
-
 
         return retour;
     }
@@ -311,6 +313,7 @@ public class Jeu extends Observable {
         }
         if(atteindre_but == nombre_but) {
             jeu_fini = true;
+            this.enregistre_score();
 
             niveaux.Changer_niveau(this);
             if (niveaux.niveau_actuel == 6) {
@@ -327,5 +330,21 @@ public class Jeu extends Observable {
 
     public void viderGrille() {
         grilleEntites=new Case[SIZE_X][SIZE_Y];
+    }
+
+    public int Get_score_actuel(){return this.nombre_pas;}
+
+    private void enregistre_score()
+    {
+        int meilleur_score=t.recuperation_meilleur_score_niveau(this.GetNiveaux());
+        if(meilleur_score>this.nombre_pas)
+        {
+            t.Enregistre_score_dans_fichier(this.GetNiveaux(),this.nombre_pas);
+        }
+    }
+
+    public void Passer_Niveau(){
+        jeu_fini = true;
+        niveaux.Changer_niveau(this);
     }
 }
