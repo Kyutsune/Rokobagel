@@ -109,7 +109,9 @@ public class VueControleur extends JFrame implements Observer {
                         break;
 
                     case KeyEvent.VK_P:
+                        
                         jeu.Passer_Niveau();
+
                         mettreAJourAffichage();
                         break;
 
