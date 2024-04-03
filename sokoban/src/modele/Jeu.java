@@ -341,4 +341,9 @@ public class Jeu extends Observable {
             t.Enregistre_score_dans_fichier(this.GetNiveaux(),this.nombre_pas);
         }
     }
+
+    public void Passer_Niveau(){
+        jeu_fini = true;
+        niveaux.Changer_niveau(this);
+    }
 }
