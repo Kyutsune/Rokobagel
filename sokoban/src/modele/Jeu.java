@@ -210,26 +210,31 @@ public class Jeu extends Observable {
             }
 
 
-            for(int x=0;x<this.SIZE_X;++x) {
-                for (int y = 0; y < this.SIZE_Y; ++y) {
+
 
                     if(caseALaPosition(pCible) instanceof Bouton) {
-                        if (grilleEntites[x][y] instanceof Grille) {
-                            ((Grille) grilleEntites[x][y]).setEtat_grille(true);
+                        for(int x=0;x<this.SIZE_X;++x) {
+                            for (int y = 0; y < this.SIZE_Y; ++y) {
+                                if (grilleEntites[x][y] instanceof Grille) {
+                                    ((Grille) grilleEntites[x][y]).setEtat_grille(true);
+                                }
+                            }
                         }
-
                     }
 
                     if(caseALaPosition(pCourant) instanceof Bouton) {
-                        if (grilleEntites[x][y] instanceof Grille) {
-                            ((Grille) grilleEntites[x][y]).setEtat_grille(false);
+                        for(int x=0;x<this.SIZE_X;++x) {
+                            for (int y = 0; y < this.SIZE_Y; ++y) {
+                                if (grilleEntites[x][y] instanceof Grille) {
+                                    ((Grille) grilleEntites[x][y]).setEtat_grille(false);
+                                }
+                            }
                         }
-
                     }
 
-                }
 
-            }
+
+
 
 
 
