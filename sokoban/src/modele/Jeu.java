@@ -7,6 +7,7 @@ package modele;
 
 
 import java.awt.Point;
+import java.nio.channels.AsynchronousByteChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -188,7 +189,7 @@ public class Jeu extends Observable {
 
             if (eCible != null && eCible instanceof Bloc) {
                 // On peut pousser le bloc que si la cible est du vide
-                if (caseALaPosition(pCible) instanceof Vide)
+                if (caseALaPosition(pCible) instanceof Vide || caseALaPosition(pCible) instanceof Bouton)
                     eCible.pousser(d);
             }
             if(caseALaPosition(pCible) instanceof Porte)
