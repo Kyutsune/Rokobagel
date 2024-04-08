@@ -8,6 +8,4 @@ public class But extends Case {
         return e == null;
     }
 
-
-
 }

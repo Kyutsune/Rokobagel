@@ -161,7 +161,7 @@ public class VueControleur extends JFrame implements Observer {
     private void placerLesComposantsGraphiques() {
         InitialiserTailleTerrain(this.jeu);
 
-        setTitle("Sokoban");
+        setTitle("Sokotham");
         setSize(700, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -224,11 +224,9 @@ public class VueControleur extends JFrame implements Observer {
                         if(jeu.getGrille()[x][y] instanceof Porte)
                             tabJLabel[x][y].setIcon(icoPorte);
                         if(jeu.getGrille()[x][y] instanceof Grille && ((Grille) jeu.getGrille()[x][y]).isEtat_grille() == false) {
-                            System.out.println(((Grille) jeu.getGrille()[x][y]).isEtat_grille());
                             tabJLabel[x][y].setIcon(icoGrille);
                         }
                         if(jeu.getGrille()[x][y] instanceof Grille && ((Grille) jeu.getGrille()[x][y]).isEtat_grille() == true) {
-                            System.out.println(((Grille) jeu.getGrille()[x][y]).isEtat_grille());
                             tabJLabel[x][y].setIcon(icoGrilleOuverte);
                         }
 
