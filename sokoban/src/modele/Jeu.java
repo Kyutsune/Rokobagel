@@ -322,9 +322,6 @@ public class Jeu extends Observable {
 
 
             niveaux.Changer_niveau(this);
-            if (niveaux.niveau_actuel == 6) {
-
-            }
         }
         else
             jeu_fini=false;
